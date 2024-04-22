@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.homess.mappers.PostMapper">
+    <insert id="insertPost">
+        INSERT INTO posts_tb(user_uid, category_uid, age_uid, post_title, post_content )
+        VALUES(#{userUid}, #{categoryUid}, #{ageUid}, #{postTitle}, #{postContent});
+    </insert>
+    <select id="selectPosts" resultType="com.example.homess.dtos.PostDto">
+        SELECT uid, user_uid as userUid, category_uid as categoryUid, age_uid as ageUid, post_title as postTitle, post_content as postContent, post_hits as postHits, post_like as postLike, post_created_at as postCreatedAt, deleteyn
+        FROM posts_tb ORDER BY uid DESC;
+    </select>
+    <select id="selectDetailPost" resultType="com.example.homess.dtos.PostDto">
+        SELECT user_uid as userUid, category_uid as categoryUid, age_uid as ageUid, post_title as postTitle, post_content as postContent, post_created_at as postCreatedAt
+        FROM posts_tb
+        WHERE uid = #{uid};
+    </select>
+</mapper>
